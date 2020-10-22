@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 11, 2020 at 09:54 AM
--- Server version: 10.4.8-MariaDB
--- PHP Version: 7.1.33
+-- Host: localhost
+-- Generation Time: Oct 22, 2020 at 06:37 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -56,6 +55,14 @@ CREATE TABLE `clinic` (
   `close_hr` varchar(4) NOT NULL DEFAULT '1800'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `clinic`
+--
+
+INSERT INTO `clinic` (`clinic_id`, `location`, `open_hr`, `close_hr`) VALUES
+(1, 'Fort', '1000', '1800'),
+(2, 'Kemps Corner', '1000', '1800');
+
 -- --------------------------------------------------------
 
 --
@@ -65,12 +72,20 @@ CREATE TABLE `clinic` (
 CREATE TABLE `dentist` (
   `username` varchar(32) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `phone` int(10) NOT NULL,
+  `phone` bigint(10) NOT NULL,
   `age` int(3) NOT NULL,
   `sex` set('M','F') NOT NULL,
   `d_type` set('General','Orthodontist') NOT NULL,
   `location` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dentist`
+--
+
+INSERT INTO `dentist` (`username`, `name`, `phone`, `age`, `sex`, `d_type`, `location`) VALUES
+('jhalpert', 'Jim Halpert', 9876543210, 30, 'M', 'General', 'Fort'),
+('mscott', 'Michael Scott', 9876543201, 35, 'M', 'General', 'Fort');
 
 -- --------------------------------------------------------
 
@@ -115,9 +130,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`) VALUES
-(1, 'xyz', 'be8a3638d909177ba440012673908b63aa1995f6e736815103bc9a3c320ce0e5', 'xyz@gmail.com', 'patient'),
-(2, 'abc', 'd39320adef9005bfc392c0ff0353be94f9a2632043fbf87c01477708e3cf571e', 'abc@gmail.com', 'patient'),
-(3, 'pqr', '9abf0d8b3918834479617b8c11aae430fbfd81bd6659ffac08d5c76da1a46ddf', 'pqr@gmail.com', 'patient');
+(4, 'xyz', 'be8a3638d909177ba440012673908b63aa1995f6e736815103bc9a3c320ce0e5', 'xyz@gmail.com', 'patient'),
+(5, 'mscott', '654b63819ef5a81fd2888013e9d5ae6418a869b62e8e9380e94796417d3e4574', 'mscott@gmail.com', 'dentist'),
+(6, 'jhalpert', 'adaa92c3a1ed03c68b17204801d48b8666da602c0ba93a22b8b02947f35b6237', 'jhalpert@gmail.com', 'dentist');
 
 -- --------------------------------------------------------
 
@@ -186,6 +201,12 @@ ALTER TABLE `auth_tokens`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
+-- AUTO_INCREMENT for table `clinic`
+--
+ALTER TABLE `clinic`
+  MODIFY `clinic_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `shop`
 --
 ALTER TABLE `shop`
@@ -195,7 +216,7 @@ ALTER TABLE `shop`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

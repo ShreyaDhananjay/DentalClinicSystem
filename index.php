@@ -1,39 +1,35 @@
 <?php
-
 session_start();
-
-/*if(isset($_SESSION['username'])){
-
-    $_SESSION['msg']= "You must Log in first to view this page";
-    header("location: login.php");
-
-}*/
-
+$db=mysqli_connect('localhost','root','','dcms') or die("could not connect to database");
 if(isset($_GET['logout'])){
     
     session_destroy();
     unset($_SESSION['username']);
+    unset($_SESSION['role']);
+    //unset($_COOKIE['remember']);
     header("location: login.php");
-
 }
 
 ?>
 <!DOCTYPE HTML>
 <html>
-<head>
-       <title>Homepage</title>
+<head><title>Homepage</title>
+<link href="style.css"type="text/css"rel="stylesheet"/> 
 </head>
-<link rel="stylesheet" href="style.css">
 <body>
-    <header style="background-color:white">
-    <center><h1>Dental Clinic Management System</h1></center>
-    </header>
-    <div class="menu">
-    <a href="index.php">Home</a>
+  <center>
+  <div class="menu"> 
+    <h1>Dental Clinic Management System</h1> 
+    <a href="index.php">Home</a>
+    <?php if(!isset($_SESSION['username'])/*&& !isset($_COOKIE['remember'])*/){?> 
     <a href="login.php">Login</a>
     <a href="registration.php">Sign Up</a>
-    </div>
-    <center>
+    <?php }?>
+    <?php if(isset($_SESSION['username']) /*|| isset($_COOKIE['remember'])*/){?> 
+    <a href="clinics.php">Clinics</a>
+    <a href="index.php?logout='1'">Logout</a> 
+<?php }?>
+    </div>
     <?php if(isset($_SESSION['success'])):?>
         <div>
             <h3>
@@ -43,10 +39,9 @@ if(isset($_GET['logout'])){
             ?>
             </h3>
         </div>
-    <?php endif; ?>
+    <?php endif;?>
     <?php if(isset($_SESSION['username'])):?>
     <h3>Welcome <strong><?php echo $_SESSION['username'] ; ?> </strong>
-    <button class="button"><a href="index.php?logout='1'">Logout</a></button>
     </h3>
     <?php endif; ?>
     <div class="content-section" style="width:50%">
