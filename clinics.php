@@ -38,6 +38,7 @@ if(!isset($_SESSION['username']))
     <?php }?>
     <?php if(isset($_SESSION['username']) /*|| isset($_COOKIE['remember'])*/){?> 
     <a href="clinics.php">Clinics</a>
+    <a href="appointments.php">Appointments</a>
     <a href="index.php?logout='1'">Logout</a> 
 <?php }?>
     </div>

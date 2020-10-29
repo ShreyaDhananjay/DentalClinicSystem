@@ -73,7 +73,7 @@ header('location:index.php');
                     echo "location:$link";
                     header("location:$link");
                 }
-                heade('location:index.php');
+                header('location:index.php');
             }
             else{
               echo "<h3 style='color:red; width:50%'>Incorrect password/username/role</h3><br>";

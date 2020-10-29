@@ -33,6 +33,7 @@
     <?php }?>
     <?php if(isset($_SESSION['username']) /*|| isset($_COOKIE['remember'])*/){?> 
     <a href="clinics.php">Clinics</a>
+    <a href="appointments.php">Appointments</a>
     <a href="index.php?logout='1'">Logout</a> 
 <?php }?>
     </div><br><br>
@@ -58,7 +59,8 @@
                 echo "<table><tr><th>Name</th><th>Type</th><th></th></tr>";
                 while($row = mysqli_fetch_assoc($res_dentist))
                 {
-                    echo "<tr><td>Dr. ".$row['name']."</td><td>".$row['d_type']."</td><td><a href='#'>Make Appointment</a></td></tr>";
+                    $link = "makeappointment.php?dentist=".$row['username']."";
+                    echo "<tr><td>Dr. ".$row['name']."</td><td>".$row['d_type']."</td><td><a href='$link'>Make Appointment</a></td></tr>";
                 }
             }
         }
