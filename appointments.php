@@ -56,14 +56,20 @@
     <a href="login.php">Login</a>
     <a href="registration.php">Sign Up</a>
     <?php }?>
-    <?php if(isset($_SESSION['username']) /*|| isset($_COOKIE['remember'])*/){?> 
-    <a href="clinics.php">Clinics</a>
+        <?php if(isset($_SESSION['username']) /*|| isset($_COOKIE['remember'])*/){
+        if($_SESSION['role'] == 'patient')
+        {
+            echo "<a href='clinics.php'>Clinics</a>";
+        }
+    ?> 
     <a href="appointments.php">Appointments</a>
+    <a href="pastappointments.php">Past Appointments</a>
+    <a href='updateaccount.php'>Update Account</a>
     <a href="index.php?logout='1'">Logout</a> 
 <?php }?>
     </div><br><br>
     <div class="content-section" style="width:85%">
-    <h3>Your Appointments</h3><br><br>
+    <h3>Appointments</h3><br><br>
     <?php
         if($_SESSION['role'] == 'patient') {
             $query = "SELECT * FROM appointment WHERE uname='".$_SESSION['username']."'";

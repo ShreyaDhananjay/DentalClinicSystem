@@ -52,6 +52,8 @@
     <?php if(isset($_SESSION['username']) /*|| isset($_COOKIE['remember'])*/){?> 
     <a href="clinics.php">Clinics</a>
     <a href="appointments.php">Appointments</a>
+    <a href="pastappointments.php">Past Appointments</a>
+    <a href='updateaccount.php'>Update Account</a>
     <a href="index.php?logout='1'">Logout</a> 
 <?php }?>
     </div><br><br>

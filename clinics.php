@@ -6,6 +6,8 @@ if(!isset($_SESSION['username']))
     $_SESSION['redirect'] = 'clinics.php';
     header("location: login.php");
 }
+if($_SESSION['role'] == 'dentist')
+    header("location: index.php");
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -36,9 +38,16 @@ if(!isset($_SESSION['username']))
     <a href="login.php">Login</a>
     <a href="registration.php">Sign Up</a>
     <?php }?>
-    <?php if(isset($_SESSION['username']) /*|| isset($_COOKIE['remember'])*/){?> 
-    <a href="clinics.php">Clinics</a>
+    <?php if(isset($_SESSION['username']) /*|| isset($_COOKIE['remember'])*/){
+        if($_SESSION['role'] == 'patient')
+        {
+            echo "<a href='clinics.php'>Clinics</a>";
+            echo "<a href='updateaccount.php'>Update Account</a>";
+        }
+    ?> 
     <a href="appointments.php">Appointments</a>
+    <a href="pastappointments.php">Past Appointments</a>
+    <a href='updateaccount.php'>Update Account</a>
     <a href="index.php?logout='1'">Logout</a> 
 <?php }?>
     </div>

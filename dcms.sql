@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 22, 2020 at 06:37 AM
+-- Generation Time: Nov 08, 2020 at 06:40 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `dcms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `appointment`
+--
+
+CREATE TABLE `appointment` (
+  `location` varchar(32) NOT NULL,
+  `date` date NOT NULL,
+  `time` int(4) NOT NULL,
+  `reason` varchar(50) NOT NULL,
+  `dname` varchar(32) NOT NULL,
+  `uname` varchar(32) NOT NULL,
+  `appt_id` int(10) NOT NULL,
+  `status` set('Pending','Confirmed','Cancelled','Rejected') NOT NULL DEFAULT 'Pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`location`, `date`, `time`, `reason`, `dname`, `uname`, `appt_id`, `status`) VALUES
+('Fort', '2020-11-03', 1600, 'Check-Up', 'jhalpert', 'xyz', 1, 'Cancelled'),
+('Fort', '2020-08-05', 1600, 'Check-Up', 'jhalpert', 'xyz', 2, 'Confirmed');
 
 -- --------------------------------------------------------
 
@@ -84,6 +109,7 @@ CREATE TABLE `dentist` (
 --
 
 INSERT INTO `dentist` (`username`, `name`, `phone`, `age`, `sex`, `d_type`, `location`) VALUES
+('amartin', 'Angela Martin', 9067854312, 38, 'F', 'Orthodontist', 'Kemps Corner'),
 ('jhalpert', 'Jim Halpert', 9876543210, 30, 'M', 'General', 'Fort'),
 ('mscott', 'Michael Scott', 9876543201, 35, 'M', 'General', 'Fort');
 
@@ -132,7 +158,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`) VALUES
 (4, 'xyz', 'be8a3638d909177ba440012673908b63aa1995f6e736815103bc9a3c320ce0e5', 'xyz@gmail.com', 'patient'),
 (5, 'mscott', '654b63819ef5a81fd2888013e9d5ae6418a869b62e8e9380e94796417d3e4574', 'mscott@gmail.com', 'dentist'),
-(6, 'jhalpert', 'adaa92c3a1ed03c68b17204801d48b8666da602c0ba93a22b8b02947f35b6237', 'jhalpert@gmail.com', 'dentist');
+(6, 'jhalpert', 'adaa92c3a1ed03c68b17204801d48b8666da602c0ba93a22b8b02947f35b6237', 'jhalpert@gmail.com', 'dentist'),
+(7, 'amartin', 'cfc5927780038bdf3ec1cade8551002540a1ccfc7c1e1d7ec109a9968a992fe9', 'amartin@gmail.com', 'dentist');
 
 -- --------------------------------------------------------
 
@@ -142,14 +169,27 @@ INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`) VALUES
 
 CREATE TABLE `useraccount` (
   `username` varchar(32) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `mobile_no` int(10) NOT NULL,
-  `age` int(3) NOT NULL
+  `name` varchar(50) DEFAULT NULL,
+  `mobile_no` bigint(10) DEFAULT NULL,
+  `dob` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `useraccount`
+--
+
+INSERT INTO `useraccount` (`username`, `name`, `mobile_no`, `dob`) VALUES
+('xyz', 'XYZ ABD', 9876543210, '2000-01-01');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `appointment`
+--
+ALTER TABLE `appointment`
+  ADD PRIMARY KEY (`appt_id`) USING BTREE;
 
 --
 -- Indexes for table `auth_tokens`
@@ -195,6 +235,12 @@ ALTER TABLE `useraccount`
 --
 
 --
+-- AUTO_INCREMENT for table `appointment`
+--
+ALTER TABLE `appointment`
+  MODIFY `appt_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `auth_tokens`
 --
 ALTER TABLE `auth_tokens`
@@ -216,7 +262,7 @@ ALTER TABLE `shop`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -232,7 +278,8 @@ ALTER TABLE `dentist`
 -- Constraints for table `useraccount`
 --
 ALTER TABLE `useraccount`
-  ADD CONSTRAINT `useraccount_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`);
+  ADD CONSTRAINT `useraccount_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`),
+  ADD CONSTRAINT `useraccount_ibfk_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
