@@ -18,7 +18,7 @@
         $hr = mysqli_real_escape_string($db, $t1);
         $reason = mysqli_real_escape_string($db, $_POST['reason']);
         #echo $hr;
-        $query = "INSERT INTO pending_appointment(dname, uname, location, date, time, reason) VALUES ('$dname', '$uname', '$locn', '$date_val', '$hr', '$reason')"; 
+        $query = "INSERT INTO appointment(dname, uname, location, date, time, reason) VALUES ('$dname', '$uname', '$locn', '$date_val', '$hr', '$reason')"; 
         mysqli_query($db, $query);
         #echo "success";
         header("location: appointments.php");
