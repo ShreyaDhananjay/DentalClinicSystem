@@ -1,43 +1,41 @@
 <?php
     session_start();
     $db=mysqli_connect('localhost','root','','dcms') or die("could not connect to database");
-    if(!isset($_SESSION['username']))
-    header("location: login.php");
     if(!isset($_GET['location']))
     header("location: clinics.php");
+    $locn = $_GET['location'];
+    if(!isset($_SESSION['username']))
+    {
+        $_SESSION['redirect'] = "dentist.php?location=".$locn;
+        header("location: login.php");
+    }
     if($_SESSION['role'] == 'dentist')
     header("location: index.php");
-    $locn = $_GET['location'];
+    
 ?>
 <!DOCTYPE HTML>
 <html>
-<head><title>Dentists</title>
-<link href="style.css"type="text/css"rel="stylesheet"/> 
-<style>
-    .menu a{
-        color:white;
-    }
-    a{
-        color:dodgerblue;
-    }
-    </style>
+<head>
+    <title>Dentists</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <link href="style10.css" type="text/css"rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+    <style>
+        .menu a{
+            color:white;
+        }
+        a{
+            color:dodgerblue;
+        }
+        </style>
 </head>
 <body>
   <center>
-  <div class="menu"> 
-    <h1>Dental Clinic Management System</h1> 
-    <a href="index.php">Home</a>
-    <?php if(!isset($_SESSION['username'])/*&& !isset($_COOKIE['remember'])*/){?> 
-    <a href="login.php">Login</a>
-    <a href="registration.php">Sign Up</a>
-    <?php }?>
-    <?php if(isset($_SESSION['username']) /*|| isset($_COOKIE['remember'])*/){?> 
-    <a href="clinics.php">Clinics</a>
-    <a href="appointments.php">Appointments</a>
-    <a href="pastappointments.php">Past Appointments</a>
-    <a href="index.php?logout='1'">Logout</a> 
-<?php }?>
-    </div><br><br>
+  <?php require_once("header.php");?>
     <div class="content-section" style="width:75%">
         <?php 
         $query2 = "SELECT location FROM clinic WHERE clinic_id = '$locn' LIMIT 1";

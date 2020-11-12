@@ -25,45 +25,34 @@
 ?>
 <!DOCTYPE HTML>
 <html>
-<head><title>Update Account Details</title>
-<link href="style.css"type="text/css"rel="stylesheet"/> 
-<style>
-    th, td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  th {
-    background-color: dodgerblue;
-    color: white;
-  }
-  tr:hover {background-color: #ddd;}
-  .spllink{
-      color:dodgerblue;
-  }
-  </style>
+<head>
+	<title>Update Account Details</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="styles.css">
+	<link href="style10.css" type="text/css"rel="stylesheet"/>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+	<style>
+		th, td {
+		padding: 15px;
+		text-align: left;
+		border-bottom: 1px solid #ddd;
+	}
+	th {
+		background-color: dodgerblue;
+		color: white;
+	}
+	tr:hover {background-color: #ddd;}
+	.spllink{
+		color:dodgerblue;
+	}
+	</style>
 </head>
 <body>
   <center>
-  <div class="menu"> 
-    <h1>Dental Clinic Management System</h1> 
-    <a href="index.php">Home</a>
-    <?php if(!isset($_SESSION['username'])/*&& !isset($_COOKIE['remember'])*/){?> 
-    <a href="login.php">Login</a>
-    <a href="registration.php">Sign Up</a>
-    <?php }?>
-    <?php if(isset($_SESSION['username']) /*|| isset($_COOKIE['remember'])*/){
-        if($_SESSION['role'] == 'patient')
-        {
-			echo "<a href='clinics.php'>Clinics</a>";
-        }
-    ?> 
-    <a href="appointments.php">Appointments</a>
-    <a href="pastappointments.php">Past Appointments</a>
-	<a href='updateaccount.php'>Update Account</a>
-    <a href="index.php?logout='1'">Logout</a> 
-	<?php }?>
-    </div><br><br>
+  <?php require_once("header.php");?>
 	<?php
 		if($msg != "")
 		echo $msg;
@@ -108,7 +97,7 @@
 			<tr><th><label for="dob">Date of Birth</label></th>
 			<td><input type="date" name="dob" value="<?php echo $dob; ?>" required></td></tr>
 			</table>
-			<input type="submit" name="update_acc" class="button" value="Update Account Details" style="color:royalblue; width:45%"/>
+			<input type="submit" name="update_acc" class="example_e" value="Update Account Details" style="color:royalblue; width:45%"/>
 		</form>
 	<?php
 	}

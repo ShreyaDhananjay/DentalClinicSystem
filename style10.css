@@ -2,13 +2,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+	font-family: "Montserrat", sans-serif;
   }
-    body {
-        background-color: powderblue;
-        color: #333333;
-        min-height: 100vh;
-    }
+ .body{
+	 background-color:white;
+ }
     .menu a{
       color:white;
     }
@@ -67,6 +66,7 @@ input {
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+	    font-family: "Montserrat", sans-serif;
   }
 
   .select1 {
@@ -82,10 +82,17 @@ input {
   th, td {
     padding: 15px;
     text-align: left;
+	    font-family: "Montserrat", sans-serif;	
     border-bottom: 1px solid #ddd;
   }
   th {
-    background-color: dodgerblue;
+	      font-family: "Montserrat", sans-serif;
+    font-size: 1.1rem;
+    text-transform: uppercase;
     color: white;
+    letter-spacing: .2em;
+	background-color: dodgerblue	;
   }
   tr:hover {background-color: #ddd;}
+  
+ 

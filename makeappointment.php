@@ -26,38 +26,31 @@
 ?>
 <!DOCTYPE HTML>
 <html>
-<head><title>Make Appointment</title>
-<link href="style.css"type="text/css"rel="stylesheet"/> 
-<style>
-    .menu a{
-        color:white;
-    }
-    a{
-        color:dodgerblue;
-    }
-    #dname, #clinic{
-        background-color: powderblue;
-    }
-    </style>
+<head>
+    <title>Make Appointment</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <link href="style10.css" type="text/css"rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+    <style>
+        .menu a{
+            color:white;
+        }
+        a{
+            color:dodgerblue;
+        }
+        #dname, #clinic{
+            background-color: powderblue;
+        }
+        </style>
 </head>
 <body>
   <center>
-  <div class="menu"> 
-    <h1>Dental Clinic Management System</h1> 
-    <a href="index.php">Home</a>
-    <?php if(!isset($_SESSION['username'])/*&& !isset($_COOKIE['remember'])*/){?> 
-    <a href="login.php">Login</a>
-    <a href="registration.php">Sign Up</a>
-    <?php }?>
-    <?php if(isset($_SESSION['username']) /*|| isset($_COOKIE['remember'])*/){?> 
-    <a href="clinics.php">Clinics</a>
-    <a href="appointments.php">Appointments</a>
-    <a href="pastappointments.php">Past Appointments</a>
-    <a href='updateaccount.php'>Update Account</a>
-    <a href="index.php?logout='1'">Logout</a> 
-<?php }?>
-    </div><br><br>
-    <div class="content-section" style="width:75%">
+  <?php require_once("header.php");?>
+    <div class="content-section" style="width:70%">
     <h3>Make Appointment</h3><br><br>
         <?php 
         $query = "SELECT * from dentist WHERE username='$dentist_uname'";
@@ -79,7 +72,7 @@
             echo "<option value='12:00'><option value='13:00'><option value='14:00'><option value='15:00'>";
             echo "<option value='16:00'><option value='17:00'></datalist></td></tr>";
             echo "<tr><th>Reason For Appointment</th><td><input type='text' id='reason' name='reason' value='Check-Up' required></td></tr>";
-            echo "</table><input type='submit' name='make_appt' value='Make Appointment' class='button' style='width:50%'></form>";
+            echo "</table><input type='submit' name='make_appt' value='Make Appointment' class='example_e' style='width:50%'></form>";
         }
         ?>
         </table>

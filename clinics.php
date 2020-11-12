@@ -11,47 +11,33 @@ if($_SESSION['role'] == 'dentist')
 ?>
 <!DOCTYPE HTML>
 <html>
-<head><title>Clinics</title>
-<link href="style.css"type="text/css"rel="stylesheet"/> 
-<style>
-    th, td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  th {
-    background-color: dodgerblue;
-    color: white;
-  }
-  tr:hover {background-color: #ddd;}
-  .spllink{
-      color:dodgerblue;
-  }
-  </style>
+    <head><title>Clinics</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <link href="style10.css"type="text/css"rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet"> 
+    <style>
+        th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: dodgerblue;
+        color: white;
+    }
+    tr:hover {background-color: #ddd;}
+    .spllink{
+        color:dodgerblue;
+    }
+    </style>
 </head>
 <body>
   <center>
-  <div class="menu"> 
-    <h1>Dental Clinic Management System</h1> 
-    <a href="index.php">Home</a>
-    <?php if(!isset($_SESSION['username'])/*&& !isset($_COOKIE['remember'])*/){?> 
-    <a href="login.php">Login</a>
-    <a href="registration.php">Sign Up</a>
-    <?php }?>
-    <?php if(isset($_SESSION['username']) /*|| isset($_COOKIE['remember'])*/){
-        if($_SESSION['role'] == 'patient')
-        {
-            echo "<a href='clinics.php'>Clinics</a>";
-            echo "<a href='updateaccount.php'>Update Account</a>";
-        }
-    ?> 
-    <a href="appointments.php">Appointments</a>
-    <a href="pastappointments.php">Past Appointments</a>
-    <a href='updateaccount.php'>Update Account</a>
-    <a href="index.php?logout='1'">Logout</a> 
-<?php }?>
-    </div>
-<br><br>
+  <?php require_once("header.php");?>
     <div class="content-section" style="width:75%">
         <h2>Clinics</h2>
         <?php 
@@ -65,7 +51,7 @@ if($_SESSION['role'] == 'dentist')
                 $id = $row['clinic_id'];
                 $link = "dentists.php?location=".$id."";
                 $cl ="spllink";
-                echo "<tr><td>".$id."</td><td>".$row['location']."</td><td>".$row['open_hr']."</td><td>".$row['close_hr']."</td><td><a href='".$link."' class='".$cl."'>Check Dentists</a></td></tr>";
+                echo "<tr><td>".$id."</td><td>".$row['location']."</td><td>".$row['open_hr']."</td><td>".$row['close_hr']."</td><td><a class='nav__links' href='".$link."' class='".$cl."'>Check Dentists</a></td></tr>";
             }
         }
         else
