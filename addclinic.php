@@ -23,7 +23,7 @@
             $res = mysqli_query($db, $query);
             if($res == true)
             {
-                echo "success";
+                #echo "success";
                 array_push($msg, "Clinic added successfullly");
             }
             else
@@ -74,7 +74,7 @@
     ?>
     <form action = '' method='post'>
     <table>
-        <tr><th>Location</th><td><input type='text' id='locn' name='location' placeholder='e.g. Bandra' required></td></tr>
+        <tr><th>Location</th><td><input type='text' id='locn' name='location' maxlength="32"placeholder='e.g. Bandra' required></td></tr>
         <tr><th>Opening Hour</th><td><input list='times' name='open_hr' required><datalist id='times'><option value='10:00'><option value='11:00'>
         <option value='12:00'><option value='13:00'><option value='14:00'><option value='15:00'>
         <option value='16:00'><option value='17:00'></datalist></td></tr>

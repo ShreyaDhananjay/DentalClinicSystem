@@ -24,8 +24,11 @@
     <li><a href="pastappointments.php">Past Appointments</a></li>
     <?php if($_SESSION['role'] == 'patient'){
         echo "<li><a href='updateaccount.php'>Update Account</a></li>";
-    }}}?>
-    <li><a href="index.php?logout='1'">Logout</a> </li>	
+    }}?>
+    
+    <li><a href="index.php?logout='1'">Logout</a> </li>	
+    <?php }?>
+    
 
                    
                 </ul>

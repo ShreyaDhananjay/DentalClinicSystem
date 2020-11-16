@@ -1,6 +1,7 @@
 <?php
     session_start();
     $db=mysqli_connect('localhost','root','','dcms') or die("could not connect to database");
+    $err = [];
     if(!isset($_SESSION['username']))
     header("location: login.php");
     if(!isset($_GET['dentist']))
@@ -17,11 +18,21 @@
         $t1 = substr($_POST['time'], 0, 2)."00";
         $hr = mysqli_real_escape_string($db, $t1);
         $reason = mysqli_real_escape_string($db, $_POST['reason']);
+        $checkq = "SELECT * FROM appointment WHERE uname = '$uname' AND time='$hr' AND date='$date_val' AND (status='Pending' OR status='Confirmed')";
+        #echo $checkq;
+        $res = mysqli_query($db, $checkq);
+        if($res != false && mysqli_num_rows($res) > 0)
+        {
+            array_push($err, "<h3 style='color:red'>You already have a pending or confirmed appointment at the same time</h3>");
+        }
         #echo $hr;
-        $query = "INSERT INTO appointment(dname, uname, location, date, time, reason) VALUES ('$dname', '$uname', '$locn', '$date_val', '$hr', '$reason')"; 
-        mysqli_query($db, $query);
-        #echo "success";
-        header("location: appointments.php");
+        else
+        {
+            
+            $query = "INSERT INTO appointment(dname, uname, location, date, time, reason) VALUES ('$dname', '$uname', '$locn', '$date_val', '$hr', '$reason')"; 
+            if(mysqli_query($db, $query))
+            header("location: appointments.php");
+        }
     }
 ?>
 <!DOCTYPE HTML>
@@ -53,6 +64,13 @@
     <div class="content-section" style="width:70%">
     <h3>Make Appointment</h3><br><br>
         <?php 
+        if(sizeof($err)>0)
+        {
+            foreach($err as $m)
+            {
+                echo $m;
+            }
+        }
         $query = "SELECT * from dentist WHERE username='$dentist_uname'";
         $result = mysqli_query($db, $query);
         if($result == false || mysqli_num_rows($result) == 0)
