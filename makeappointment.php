@@ -11,6 +11,7 @@
     $dentist_uname = $_GET['dentist'];
     if(isset($_POST['make_appt']))
     {
+        $notposs = 0;
         $uname = mysqli_real_escape_string($db, $_SESSION['username']);
         $dname = mysqli_real_escape_string($db, $dentist_uname);
         $locn = mysqli_real_escape_string($db, $_POST['clinic']);
@@ -19,16 +20,21 @@
         $hr = mysqli_real_escape_string($db, $t1);
         $reason = mysqli_real_escape_string($db, $_POST['reason']);
         $checkq = "SELECT * FROM appointment WHERE uname = '$uname' AND time='$hr' AND date='$date_val' AND (status='Pending' OR status='Confirmed')";
-        #echo $checkq;
+        $checkq2 = "SELECT * FROM appointment WHERE dname = '$dname' AND time='$hr' AND date='$date_val' AND status='Confirmed'";
+        #echo $checkq2;
         $res = mysqli_query($db, $checkq);
+        $res2 = mysqli_query($db, $checkq2);
         if($res != false && mysqli_num_rows($res) > 0)
         {
-            array_push($err, "<h3 style='color:red'>You already have a pending or confirmed appointment at the same time</h3>");
+            $notposs = 1;
+            array_push($err, "<h3 style='color:red'>You already have a pending or confirmed appointment at the same time.</h3>");
         }
-        #echo $hr;
-        else
+        if($res2 != false && mysqli_num_rows($res2) > 0){
+            $notposs = 1;
+            array_push($err, "<h3 style='color:red'>The dentist already has a confirmed appointment at the same time</h3><h3 style='color:red'> Please choose a different date/time</h3>");
+        }
+        if($notposs == 0)
         {
-            
             $query = "INSERT INTO appointment(dname, uname, location, date, time, reason) VALUES ('$dname', '$uname', '$locn', '$date_val', '$hr', '$reason')"; 
             if(mysqli_query($db, $query))
             header("location: appointments.php");

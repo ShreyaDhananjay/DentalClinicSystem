@@ -20,7 +20,7 @@
         $mobile_no = $_POST['mobile_no'];
         $clinic = mysqli_real_escape_string($db, $_POST['clinic']);
         $noerr = 0;
-        if($mobile_no < 700000000 || $mobile_no > 1000000000)
+        if($mobile_no < 700000000 || $mobile_no > 10000000000)
 		{
             $noerr = 1;
             array_push($msg, "<h3 style='color:red'>Invalid mobile number</h3>");
@@ -38,7 +38,7 @@
             $res = mysqli_query($db, $query);
             if($res == true)
             {
-                echo "success";
+                #echo "success";
                 array_push($msg, "<h3 style='color:green'>Dentist information added successfully</h3>");
             }
             else

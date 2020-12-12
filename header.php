@@ -3,11 +3,11 @@
     <nav>
     <ul class="nav__links">
     <li><a href="index.php">Home</a></li>
-    <?php if(!isset($_SESSION['username'])/*&& !isset($_COOKIE['remember'])*/){?> 
+    <?php if(!isset($_SESSION['username'])){?> 
 	 <li><a href="registration.php">Sign up</a></li>	
      <li><a class="cta" href="login.php">Login</a></li>
     <?php }?>
-	<?php if(isset($_SESSION['username']) /*|| isset($_COOKIE['remember'])*/){
+	<?php if(isset($_SESSION['username'])){
         if($_SESSION['role'] == 'admin')
         {
             echo "<li><a href='addclinic.php'>Add Clinic</a></li>";

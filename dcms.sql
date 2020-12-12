@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 12, 2020 at 02:46 PM
+-- Generation Time: Dec 12, 2020 at 02:22 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -44,8 +44,7 @@ CREATE TABLE `appointment` (
 
 INSERT INTO `appointment` (`location`, `date`, `time`, `reason`, `dname`, `uname`, `appt_id`, `status`) VALUES
 ('Fort', '2020-11-03', 1600, 'Check-Up', 'jhalpert', 'xyz', 1, 'Cancelled'),
-('Fort', '2020-08-05', 1600, 'Check-Up', 'jhalpert', 'xyz', 2, 'Confirmed'),
-('Kemps Corner', '2020-12-04', 1600, 'Check-Up', 'amartin', 'xyz', 5, 'Pending');
+('Fort', '2020-08-05', 1600, 'Check-Up', 'jhalpert', 'xyz', 2, 'Confirmed');
 
 -- --------------------------------------------------------
 
@@ -88,7 +87,8 @@ CREATE TABLE `clinic` (
 INSERT INTO `clinic` (`clinic_id`, `location`, `open_hr`, `close_hr`) VALUES
 (1, 'Fort', '1000', '1800'),
 (2, 'Kemps Corner', '1000', '1800'),
-(3, 'Bandra', '1100', '1700');
+(3, 'Bandra', '1100', '1700'),
+(4, 'Andheri', '1000', '1500');
 
 -- --------------------------------------------------------
 
@@ -112,8 +112,21 @@ CREATE TABLE `dentist` (
 
 INSERT INTO `dentist` (`username`, `name`, `phone`, `age`, `sex`, `d_type`, `location`) VALUES
 ('amartin', 'Angela Martin', 9067854312, 38, 'F', 'Orthodontist', 'Kemps Corner'),
+('dentist1', 'John Doe', 9876543120, 30, 'M', 'Orthodontist', 'Bandra'),
 ('jhalpert', 'Jim Halpert', 9876543210, 30, 'M', 'General', 'Fort'),
 ('mscott', 'Michael Scott', 9876543201, 35, 'M', 'General', 'Fort');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_reset_temp`
+--
+
+CREATE TABLE `password_reset_temp` (
+  `email` varchar(250) NOT NULL,
+  `key1` varchar(250) NOT NULL,
+  `expDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -158,11 +171,13 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`) VALUES
-(4, 'xyz', 'be8a3638d909177ba440012673908b63aa1995f6e736815103bc9a3c320ce0e5', 'xyz@gmail.com', 'patient'),
+(4, 'xyz', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'xyz@gmail.com', 'patient'),
 (5, 'mscott', '654b63819ef5a81fd2888013e9d5ae6418a869b62e8e9380e94796417d3e4574', 'mscott@gmail.com', 'dentist'),
 (6, 'jhalpert', 'adaa92c3a1ed03c68b17204801d48b8666da602c0ba93a22b8b02947f35b6237', 'jhalpert@gmail.com', 'dentist'),
 (7, 'amartin', 'cfc5927780038bdf3ec1cade8551002540a1ccfc7c1e1d7ec109a9968a992fe9', 'amartin@gmail.com', 'dentist'),
-(8, 'admin1', '700de62160665c9da3c9adc67420ae415158cbaca2cd6cffe1b5156b21c9005e', 'admin1@gmail.com', 'admin');
+(8, 'admin1', '700de62160665c9da3c9adc67420ae415158cbaca2cd6cffe1b5156b21c9005e', 'admin1@gmail.com', 'admin'),
+(9, 'dentist1', '700de62160665c9da3c9adc67420ae415158cbaca2cd6cffe1b5156b21c9005e', 'd1@gmail.com', 'dentist'),
+(10, 'abc', '020ee91718791bd2007be8ac06fc7e96717ed79ae8d9fac0fb4ca524d412db99', 'abc@gmail.com', 'patient');
 
 -- --------------------------------------------------------
 
@@ -182,7 +197,7 @@ CREATE TABLE `useraccount` (
 --
 
 INSERT INTO `useraccount` (`username`, `name`, `mobile_no`, `dob`) VALUES
-('xyz', 'XYZ ABD', 9876543210, '2000-01-01');
+('xyz', 'Jane Doe', 9876543210, '2000-10-06');
 
 --
 -- Indexes for dumped tables
@@ -241,7 +256,7 @@ ALTER TABLE `useraccount`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `appt_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `appt_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `auth_tokens`
@@ -253,7 +268,7 @@ ALTER TABLE `auth_tokens`
 -- AUTO_INCREMENT for table `clinic`
 --
 ALTER TABLE `clinic`
-  MODIFY `clinic_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `clinic_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `shop`
@@ -265,7 +280,7 @@ ALTER TABLE `shop`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables

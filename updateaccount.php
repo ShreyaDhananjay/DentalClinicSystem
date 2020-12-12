@@ -15,12 +15,19 @@
 		$uname = $_SESSION['username'];
 		$name = $_POST['name'];
 		$mobile_no = $_POST['mobile_no'];
-		$dob = $_POST['dob'];
-		$query = "UPDATE useraccount SET name='$name', mobile_no = '$mobile_no', dob='$dob' WHERE username = '$uname'";
-		//echo $query;
-		$res = mysqli_query($db, $query);
-		if($res)
-		$msg = "<h3 style='color:green'>Data updated successfully</h3>";
+		if($mobile_no < 700000000 || $mobile_no > 1000000000)
+		{
+			$msg = "<h3 style='color:red'>Invalid mobile number</h3>";
+		}
+		else
+		{
+			$dob = $_POST['dob'];
+			$query = "UPDATE useraccount SET name='$name', mobile_no = '$mobile_no', dob='$dob' WHERE username = '$uname'";
+			//echo $query;
+			$res = mysqli_query($db, $query);
+			if($res)
+			$msg = "<h3 style='color:green'>Data updated successfully</h3>";
+		}
 	}
 ?>
 <!DOCTYPE HTML>

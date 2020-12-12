@@ -8,13 +8,11 @@ $username="";
 $count1=0;
 $errors=[];
   if(isset($_POST['login_user'])){
-    #echo "inside first if";
     if(!isset($_SESSION['username']))
     {
       $username = mysqli_real_escape_string($db, $_POST ['username']);
       $password = mysqli_real_escape_string($db, $_POST['password']);
       $role = mysqli_real_escape_string($db, $_POST['role']);
-      #echo "inside second if";
       if(!empty($username) && !empty($password))
       {
         $password= hash('sha256',$password);
@@ -23,7 +21,6 @@ $errors=[];
         $res = mysqli_fetch_assoc($results);
         if($username == $res['username'] && $password==$res['password'] && $role == $res['role'])
         {
-            #echo "inside if";
             $_SESSION['username']=$username;
             $_SESSION['role'] = $role;
             if(isset($_SESSION['redirect']))
